@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_done_support"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.karabressler.summit_hack_app.DoneSupport">
+
+    <ImageView
+        android:id="@+id/thing"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/purple_down"
+        android:scaleX="-1"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank You!"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-black"
+        android:textSize="34sp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:text="You just transferred"
+        android:textSize="34sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/txtCongrats" />
+
+    <Button
+        android:id="@+id/home_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#8b42e2"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-black"
+        android:textSize="24sp"
+        android:text="Go Back to the Wish List"/>
+</RelativeLayout>

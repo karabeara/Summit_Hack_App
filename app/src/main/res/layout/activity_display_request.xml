@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_display_request"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.karabressler.summit_hack_app.DisplayRequestActivity">
+
+    <ImageView
+        android:id="@+id/right_triangle"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:scaleX="-1"
+        android:src="@drawable/purple_down" />
+
+    <TextView
+        android:id="@+id/support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Support"
+        android:textColor="#ffffff"
+        android:textSize="45sp" />
+
+    <ImageView
+        android:id="@+id/left_triangle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/right_triangle"
+        android:adjustViewBounds="true"
+        android:src="@drawable/purple_down" />
+
+    <TextView
+        android:id="@+id/ask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/left_triangle"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="$250"
+        android:textColor="#ffffff"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/right_triangle"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="end"
+        android:text="Rafael"
+        android:textColor="#000000"
+        android:textSize="36sp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:gravity="end"
+        android:textSize="16sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtBio"
+        android:layout_below="@id/left_triangle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:text="I'm a 17 year old from Texas - I would love an Arduino to play with!"/>
+
+
+</RelativeLayout>

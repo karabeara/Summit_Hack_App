@@ -7,14 +7,55 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.reimaginebanking.api.nessieandroidsdk.models.Bill;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ArrayList<JSONObject> mDataset;
-    private AdapterCallbacks<JSONObject> mCallback;
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements ViewHolderCallbacks {
+    private ArrayList<Bill> mDataset;
+    private AdapterCallbacks<Bill> mAdapterCallback;
+
+    @Override
+    public void onItemClick(View view, int position) {
+        mAdapterCallback.onItemClicked(mDataset.get(position));
+    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public MyAdapter(ArrayList<Bill> myDataset, AdapterCallbacks myCallbacks) {
+        mDataset = myDataset;
+        mAdapterCallback = myCallbacks;
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
+        // create a new view
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v, this);
+        return vh;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        holder.mRequest.setText(mDataset.get(position).getNickname());
+
+        String temp = Double.toString(mDataset.get(position).getPaymentAmount());
+        temp = temp.substring(0, temp.length() - 2);
+        holder.mAmount.setText(temp);
+
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -25,54 +66,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView mRequest;
         public TextView mAmount;
 
-        public ViewHolder(View v) {
+        public ViewHolderCallbacks mCallbacks;
+
+
+        public ViewHolder(View v, ViewHolderCallbacks onItemClickCallback) {
             super(v);
             mProfile = (ImageView) v.findViewById(R.id.profile);
             mRequest = (TextView) v.findViewById(R.id.request);
             mAmount = (TextView) v.findViewById(R.id.amount);
+
+            mCallbacks = onItemClickCallback;
+            v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mCallback.onItemClicked(mDataset.get(getAdapterPosition()), v);
+            mCallbacks.onItemClick(v, getAdapterPosition());
         }
-    }
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<JSONObject> myDataset, AdapterCallbacks<JSONObject> callback) {
-        mDataset = myDataset;
-        mCallback = callback;
-    }
-
-    // Create new views (invoked by the layout manager)
-    @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
-        // create a new view
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_view, parent, false);
-        // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        try {
-            holder.mRequest.setText((String) mDataset.get(position).get("nickname"));
-            holder.mAmount.setText(Integer.toString((Integer) mDataset.get(position).get("balance")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
     }
 }
